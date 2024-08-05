@@ -1,0 +1,118 @@
+body {
+  background-color: #eee;
+  padding: 0;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+.styled-header {
+  background-color: #e3e3e329;
+  height: 4rem;
+}
+
+.styled-header .header-grid {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  height: 100%;
+  align-items: center;
+  padding: 0 4rem;
+}
+.styled-header .header-grid .related {
+  width: 30%;
+}
+.styled-header .header-grid .Logo {
+  color: #d9121f;
+  text-decoration: none;
+  position: relative;
+  z-index: 3;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.styled-header .header-grid .nav-links {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  justify-content: center;
+}
+.styled-header .header-grid .nav-links .nav-opt {
+  color: #000 !important;
+  font-weight: 500;
+}
+
+.styled-header .header-grid .sides-btns {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.styled-header .header-grid .sides-btns .cart-btn {
+  position: relative;
+  width: fit-content;
+}
+.styled-header .header-grid .sides-btns .cart-btn .cart-count {
+  position: absolute;
+  top: 0%;
+  right: -20%;
+  background: #d9121f;
+  padding: 0%;
+  margin: 0%;
+  color: #fff;
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: small;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    bottom: -100%;
+  }
+  to {
+    opacity: 1;
+    bottom: 0;
+  }
+}
+
+/* /////////////////////////////////////////// Catogery \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ */
+
+.category_page .category_heding {
+  margin: 3rem 0;
+  text-transform: capitalize;
+}
+
+/* /////////////////////////////////////////// Catogery \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ */
+
+.empty_cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+}
+
+.empty_cart .icon {
+  opacity: 0.1;
+  font-weight: lighter;
+  height: 8rem;
+  width: 8rem;
+}
+
+.empty_cart p {
+  opacity: 0.9;
+  font-size: 15px;
+}
+
+.empty_cart .button {
+  background-color: #d9121f;
+  color: #fff;
+  border: none;
+  min-width: 15rem;
+  font-size: large;
+  font-weight: 500;
+  text-decoration: none;
+  text-align: center;
+}
