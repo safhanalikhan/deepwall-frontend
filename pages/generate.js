@@ -21,8 +21,8 @@ const ColWrapper = styled.div`
   ${(props) =>
     props?.results
       ? `  
-      // height: 100%;
-      height: calc(100vh - 4rem - 10rem)    ;
+      height: 100%;
+      // height: calc(100vh - 4rem - 10rem)    ;
 
       `
       : `
@@ -30,6 +30,14 @@ const ColWrapper = styled.div`
     `}
   margin:0.5rem 0;
   gap: 2rem;
+
+  @media screen and (max-width: 992px) {
+      flex-direction:column;
+      justify-content: space-between;
+      align-items:center;
+
+  }
+
 `;
 const PriceRow = styled.div`
   display: flex;
@@ -53,10 +61,13 @@ const Row = styled.div`
   flex-direction: column;
   justify-content: space-between;
   // gap: 2rem;
-  padding: 20px 0;
+  padding: 20px 5rem;
   // margin: 0 auto;
   height: 100%;
   // flex:1
+  @media screen and (max-width: 992px) {
+      padding: 20px 2rem;
+  }
 `;
 const ImagesGrid = styled.div`
   display: grid;
@@ -155,7 +166,7 @@ export default function GeneratePage() {
   return (
     <Creative className="gereante_page ">
       {/* <Center> */}
-      <Row className="container ">
+      <Row >
         <Title>Fit Your Thoughts in to Frame </Title>
         {/* <ImagesGrid className="mt-2 mb-3 d-flex justify-content-center"> */}
 

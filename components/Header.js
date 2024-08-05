@@ -5,6 +5,7 @@ import { useContext, useState } from "react";
 import { CartContext } from "@/components/CartContext";
 import BarsIcon from "@/components/icons/Bars";
 // import { usePathname } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 const StyledHeader = styled.header`
   background-color: #222;
@@ -83,7 +84,7 @@ const StyledNav = styled.nav`
     justify-content: flex-start;
     font-size: 1rem;
     font-weight: 500;
-    color: #000;
+    color: #0000009f;
     padding-left: 2rem;
     // padding-bottom: 15px;
     text-transform: capitalize;
@@ -110,6 +111,22 @@ const NavLink = styled(Link)`
     padding: 0;
   }
 `;
+const NavLinkMobile = styled.div`
+  display: block;
+  color: #aaa;
+  text-decoration: none;
+  padding: 10px 0;
+  transition:0.5s;
+  @media screen and (min-width: 768px) {
+    padding: 0;
+  }
+
+  :hover{
+    cursor:pointer;
+    color:#d9121f;
+  }
+`;
+
 const NavButton = styled.button`
   background-color: transparent;
   display: flex;
@@ -132,20 +149,31 @@ export default function Header() {
   const { cartProducts } = useContext(CartContext);
   const [mobileNavActive, setMobileNavActive] = useState(false);
   const [activeIndex, setActiveIndex] = useState(false);
+  const router = useRouter()
+
   const navPages = [
     {
       page: "Home",
       path: "/",
+      iconClass: 'bi bi-house'
     },
     {
       page: "All products",
       path: "/products",
+      iconClass: 'bi bi-images'
+    },
+    {
+      page: "Create",
+      path: "/generate",
+      iconClass: 'bi bi-pen'
     },
   ];
   // const pathname = usePathname()
-  function handleClick(index) {
+  function handleClick(index, item) {
     console.log("index index", index);
     setActiveIndex(index === activeIndex ? null : index);
+    setMobileNavActive(false)
+    router.push(`/${item?.path}`)
   }
 
   return (
@@ -159,18 +187,19 @@ export default function Header() {
         <StyledNav className="d-sm-none" mobilenavactive={mobileNavActive}>
           <div className="StyledNaItems">
             {navPages.map((item, index) => (
-              <NavLink
-                key={item.path}
+              <NavLinkMobile
+                key={item?.path}
                 className={
                   index === activeIndex
                     ? "active styled-nav-item "
                     : "styled-nav-item "
                 }
-                href={item.path}
-                onClick={() => handleClick(index)}
+                // href={item?.path}
+                onClick={() => handleClick(index, item)}
               >
-                {item.page}
-              </NavLink>
+                <i className={`${item?.iconClass} me-3`}></i>
+                <div>{item?.page}</div>
+              </NavLinkMobile>
             ))}
           </div>
         </StyledNav>
