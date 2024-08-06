@@ -4,11 +4,8 @@ import DynamicBtn from "@/components/DynamicBtn";
 import { CartContext } from "@/components/CartContext";
 import ProductCount from "@/components/ProductCount";
 import { useRouter } from "next/router";
-import { v4 as uuidv4 } from 'uuid';
-import mongoose from "mongoose";
 import { randomBytes } from 'crypto';
 
-const { ObjectId } = mongoose.Types;
 const Image = styled.img`
   max-width: 100%;
   max-height: 100%;
@@ -27,6 +24,10 @@ const ImageActionBox = styled.div`
     p {
       font-size: smaller;
     }
+  }
+  @media screen and (max-width: 992px) {
+    max-width: 700px;
+    width: 100%;
   }
 `;
 const ImageButtons = styled.div`
@@ -97,7 +98,7 @@ const ImageAction = ({ custom, product, activeImage, setActiveImages }) => {
 
   return (
     <ImageActionBox>
-      <div className="w-100 h-100 px-5 sidebar-options ">
+      <div className="w-100 h-100 sidebar-options ">
         <p>Write a review</p>
         <div className="d-flex  mt-1">
           <p className="me-3">Availability</p>
@@ -130,7 +131,7 @@ const ImageAction = ({ custom, product, activeImage, setActiveImages }) => {
           />
         </div>
         <p className="mb-0">Style</p>
-        <div className="d-flex mt-0 mb-3">
+        <div className="d-flex flex-sm-row flex-column mt-0 mb-3">
           <DynamicBtn
             btnval="Canvas Without Border"
             Dvar={selectborder}
@@ -148,7 +149,7 @@ const ImageAction = ({ custom, product, activeImage, setActiveImages }) => {
         <div className="my-3 d-flex">
           <ProductCount quantity={setSelectQuantity} />
           <div
-            className="btn btn-dark ms-2 w-100 rounded-pill"
+            className="btn btn-dark ms-2 w-100 rounded-pill mw-500 "
             onClick={() => addToCart()}
           >
             <i className="bi bi-bag-plus me-2"></i> <span> Add to cart </span>
@@ -161,7 +162,7 @@ const ImageAction = ({ custom, product, activeImage, setActiveImages }) => {
             router.push("/cart", { scroll: false });
           }}
         >
-          <div className="btn btn-outline-dark w-100 rounded-pill">
+          <div className="btn btn-outline-dark w-100 mw-500 rounded-pill">
             Buy it now
           </div>
         </div>

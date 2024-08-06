@@ -2,13 +2,12 @@ import styled from "styled-components";
 import Title from "@/components/Title";
 import { useEffect, useState } from "react";
 import Input from "@/components/Input";
-import Center from "@/components/Center";
 import axios from "axios";
-// import Image from "next/image";
 import ProductImages from "@/components/ProductImages";
 import ImageAction from "@/components/ImageAction";
-
+import Swal from "sweetalert2";
 const Creative = styled.div`
+
   // height:100%;
 `;
 const Image = styled.img`
@@ -35,6 +34,14 @@ const ColWrapper = styled.div`
       flex-direction:column;
       justify-content: space-between;
       align-items:center;
+      ${(props) =>
+    props?.results
+      ? `  
+          height: 100%;
+          `
+      : `
+          height: calc(100vh - 4rem - 15rem)    ;
+        `}
 
   }
 
@@ -55,6 +62,9 @@ const ImageBox = styled.div`
   overflow: hidden;
   // align-self:center;
   // background:#000
+  @media screen and (max-width: 992px) {
+    max-width: 700px;
+  }
 `;
 const Row = styled.div`
   display: flex;
@@ -76,12 +86,30 @@ const ImagesGrid = styled.div`
 `;
 
 const InputSec = styled.div`
-  display: flex;
+    display: flex;
+    position:relative;
+    // align-items:center;
+    padding:0;
+    height:3.5rem;
+
+    .imput-field{
+      position:absolute;
+      top:0;
+      margin:0;
+      height:100%;
+    }
 `;
 
 const GenerateBtn = styled.div`
   background: #000;
   color: #fff;
+  position:absolute;
+  right:0.4rem;
+  top:0.3rem;
+  height:2.9rem;
+  width:5rem;
+  text-align:center;
+  
   ${(props) =>
     props.isDisabled
       ? `
@@ -98,8 +126,15 @@ const GenerateBtn = styled.div`
       opacity:1;
       cursor:pointer;
       `}
-  padding: 0 2rem;
-  margin-bottom: 5px;
+  // padding: 2rem;
+  // margin-bottom: 5px;
+  border-radius:2rem;
+  @media screen and (max-width: 576px) {
+      top:0.4rem;
+      height:2.8rem;
+      width:2.8rem;
+  }
+  
 `;
 
 export default function GeneratePage() {
@@ -148,7 +183,7 @@ export default function GeneratePage() {
           setActiveImage(response.data.url);
         });
         // let uri =
-        //   "https://deepwallec2.s3.us-east-2.amazonaws.com/user_generated1722638444553.jpg";
+        //   "https://deepwallec2.s3.amazonaws.com/user_generated1722987517961.jpg";
         // setResult(uri);
         // payload = { ...payload, images: [uri] };
         // setActiveImage(uri);
@@ -156,6 +191,11 @@ export default function GeneratePage() {
       } catch (err) {
         setLoading(false);
         console.log("Error . . .", err);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+        });
       } finally {
         setLoading(false);
         setProduct({ ...payload });
@@ -164,21 +204,9 @@ export default function GeneratePage() {
   }
 
   return (
-    <Creative className="gereante_page ">
-      {/* <Center> */}
-      <Row >
+    <Creative className="gereante_page">
+      <Row className=" px-sm-5 px-3" >
         <Title>Fit Your Thoughts in to Frame </Title>
-        {/* <ImagesGrid className="mt-2 mb-3 d-flex justify-content-center"> */}
-
-        {/* // <img
-          //   src={result} // Replace with your image URL
-          //   // src={
-          //   //   "https://oaidalleapiprodscus.blob.core.windows.net/private/org-2hSGZegpBX0l1lJCg3IhTQD8/user-JiqvUpeEXsQsCdm5czNC9Wtz/img-TmZtYQ5wnYq1z9nhrovC2if7.png?st=2024-07-29T17%3A34%3A20Z&se=2024-07-29T19%3A34%3A20Z&sp=r&sv=2023-11-03&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-07-29T14%3A34%3A03Z&ske=2024-07-30T14%3A34%3A03Z&sks=b&skv=2023-11-03&sig=IuzW72wdwwdVNprPX1iSsNr8CHoq8HT95VU1nV71LgY%3D"
-          //   // } // Replace with your image URL
-          //   width={"40%"}
-          //   height={"100%"}
-          //   style={{ maxHeight: "500px" }}
-          // /> */}
 
         <ColWrapper results={result ? true : false}>
           {result || lastgeneratedImage ? (
@@ -229,7 +257,7 @@ export default function GeneratePage() {
             placeholder="prompt"
             value={prompt}
             name="prompt"
-            className={`p-3 ${emptyInput ? "border-danger border-2 border-end-0" : ""
+            className={`p-3 ps-sm-4 imput-field rounded-pill border-2 ${emptyInput ? "imput-field border-danger border-2" : ""
               }`}
             onChange={(e) => {
               setPrompt(e.target.value);
@@ -240,15 +268,18 @@ export default function GeneratePage() {
           />
           {loading ? (
             <GenerateBtn isDisabled={true} className="placeholder-glow">
-              Generate
+              {/* Generate */}
+              <i class="bi bi-arrow-up"></i>
+
             </GenerateBtn>
           ) : (
-            <GenerateBtn onClick={generatePics}>Generate</GenerateBtn>
+            <GenerateBtn onClick={generatePics}  >
+              {/* <div className="d-sm-block d-none" > Generate </div> */}
+              <i class="bi bi-arrow-up"></i>
+            </GenerateBtn>
           )}
         </InputSec>
-        {/* </ImagesGrid> */}
       </Row>
-      {/* </Center> */}
     </Creative>
   );
 }

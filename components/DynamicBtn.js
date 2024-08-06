@@ -10,8 +10,8 @@ const DynamicBtn = ({ btnval, Dvar, DsetVar, DbuttonId }) => {
       onClick={() => handleSizeButtonClick(DbuttonId)}
       className={
         Dvar === DbuttonId
-          ? "btn btn-outline-dark border-2 rounded-pill my-3 d-flex me-2 dw-os-selected"
-          : "btn btn-outline-dark rounded-pill my-3 d-flex me-2"
+          ? "btn btn-outline-dark border-2 rounded-pill my-sm-3 my-2 d-flex me-2 dw-os-selected"
+          : "btn btn-outline-dark rounded-pill my-sm-3  my-2 d-flex me-2"
       }
     >
       {btnval}

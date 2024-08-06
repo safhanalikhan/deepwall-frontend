@@ -24,8 +24,15 @@ const Image = styled.img`
 const ColWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  height: 40rem;
+  height: 100%;
+
   gap: 2rem;
+  @media screen and (max-width: 992px) {
+      flex-direction:column;
+      justify-content: space-between;
+      align-items:center;
+
+  }
 `;
 const PriceRow = styled.div`
   display: flex;
@@ -34,15 +41,27 @@ const PriceRow = styled.div`
   height: 100%;
 `;
 const ImageBox = styled.div`
+  // display: flex;
+  // flex: 1;
+  // height: 100%;
+  // max-height: 620px;
+  // max-width: 500px;
+  // justify-content: center;
+  // overflow: hidden;
+  // // align-self:center;
+  // // background:#000
   display: flex;
   flex: 1;
   height: 100%;
-  max-height: 620px;
+  max-height: 605px;
   max-width: 500px;
   justify-content: center;
   overflow: hidden;
   // align-self:center;
   // background:#000
+  @media screen and (max-width: 992px) {
+    max-width: 700px;
+  }
 `;
 const ImageActionBox = styled.div`
   display: flex;
